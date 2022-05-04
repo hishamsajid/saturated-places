@@ -159,6 +159,19 @@ def func_lonlat_from_lat_lon(row):
 
 
 def func_get_grid_from_poly(poly,resolution,base_proj='epsg:4326'):
+    """
+    Takes a polygon and creates a mesh of equally spaced points within it.
+
+    ---
+    poly: bounding box polygon within which we want to create mesh of Points
+    
+    resolution: Distance in meters between each point of the equally spaced mesh of Points.
+    This determines the size of each grid cell in the fishnet grid. func_generate_fishnet
+    esentially creates voronoi tesselations with each point of the mesh treated as a centroid.
+
+    base_proj: Base Projection from which coordinates are projected to Web Mercator, EPSG: 3857
+
+    """
 
     project = partial(
         pyproj.transform,
@@ -242,28 +255,54 @@ def func_generate_fishnet(mesh,bbox):
     return vor_gpd
 
 
-def func_saturate(grid_df,boundary_poly):
+def func_saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
+    """
+    Takes a fishnet grid created using func_generate_fishet and run Delauny Triangulation on each
+    grid cell until the Places API result is saturated.
+
+    ---
+    grid_df: GeoDataFrame containing fishnet grid created using func_generate_fishent
+
+    boundary_poly: Polygon which acts as the boundary for data pulled via the Places API
+
+    fp_working_file: File path for working file, must be in .pkl format
+
+    fp_output: File path for final output file, must be in .shp format
+
+    api_request_limit: Maximum number of Places API requests that can be sent, use to control costs.
+
+    api_key: Google API key.
+
+    resolution: Sets the radius in meters in which the Google API searches, this shuld be roughly equal
+    to the size of one grid-cell Polygon
+    
+    """
     rdf_list = []
     centroids = []
     requests_counter = 0
-    limit = 2500
+    limit = api_request_limit
+    if('fetched' not in grid_df.columns):
+        grid_df['fetched'] = 0
+
+    grid_df['centroid'] = grid_df.bounded_vor.centroid
     for ind, row in grid_df.iterrows():
         if(row.fetched!=1):
             left = len(grid_df)-ind
             out_str = 'requests: {req} & vor_left: {left}'.format(req=requests_counter,left=left)
             sys.stdout.write(out_str)
             sys.stdout.flush()
-            resolution = 1500
+            resolution = 200
             level = 1
 
             #LEVEL=1
             coords = row.centroid.xy
-            lat,lon = coords[0][0],coords[1][0]
+            # print(coords)
+            lon,lat = coords[0][0],coords[1][0]
             centroids.append(np.array([lat,lon]))
             #print(np.array([lat,lon]))
             requests_counter+=3
             if(requests_counter<=limit):
-                rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution)
+                rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution,api_key=api_key)
             else:
                 print('LIMIT REACHED!')
                 sys.exit()
@@ -296,10 +335,10 @@ def func_saturate(grid_df,boundary_poly):
                             centroid = np.array(poly.centroid.coords)
                             #print(centroid[0])
                             centroids.append(centroid[0])
-                            lat,lon= centroid[0][0],centroid[0][1]
+                            lon,lat = centroid[0][0],centroid[0][1]
                             requests_counter+=3
                             if(requests_counter<=limit):
-                                rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution/level)
+                                rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution/level,api_key=api_key)
                             else:
                                 print('LIMIT REACHED!')
                                 sys.exit()
@@ -324,10 +363,10 @@ def func_saturate(grid_df,boundary_poly):
                                         centroid = np.array(centroid.coords)
                                         #print(centroid[0])
                                         centroids.append(centroid[0])
-                                        lat,lon= centroid[0][0],centroid[0][1]
+                                        lon,lat= centroid[0][0],centroid[0][1]
                                         requests_counter+=3
                                         if(requests_counter<=limit):
-                                            rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution/level)
+                                            rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution/level,api_key=api_key)
                                         else:
                                             print('LIMIT REACHEAD!')
                                             sys.exit()
@@ -351,10 +390,10 @@ def func_saturate(grid_df,boundary_poly):
                                                 centroid = np.array(centroid.coords)
                                                 #print(centroid[0])
                                                 centroids.append(centroid[0])
-                                                lat,lon= centroid[0][0],centroid[0][1]
+                                                lon,lat= centroid[0][0],centroid[0][1]
                                                 requests_counter+=3
                                                 if(requests_counter<=limit):
-                                                    rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution/level)
+                                                    rdf = func_get_places_poi(lat=lat,lon=lon,resolution=resolution/level,api_key=api_key)
                                                 else:
                                                     print('LIMIT REACHED!')
                                                     sys.exit()
@@ -364,13 +403,19 @@ def func_saturate(grid_df,boundary_poly):
                                             else:
                                                 pass
             temp_dfs = pd.concat(rdf_list)
-            fname = '../data/dev/vor_latest2.pkl'
+            #fname = '../data/dev/vor_latest2.pkl'
+            fname = fp_working_file
+            fp_working_file
             temp_dfs.to_pickle(fname)
             
             grid_df.loc[ind,'fetched']=1
             temp = grid_df
             temp = temp.drop(columns=['centroid'])
-            temp.to_file('../data/vector/dev/LAHORE/gmaps_places/grid_dfonoi_fishnet_1000m_updated_fix2.shp')
+            temp.to_file(fp_outpt)
+            #temp.to_file('../data/vector/dev/LAHORE/gmaps_places/grid_dfonoi_fishnet_1000m_updated_fix2.shp')
             
         elif(row.fetched==1):
-            print('fetched')
+            pass
+            #print('fetched')
+
+    return temp_dfs
