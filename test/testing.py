@@ -43,8 +43,11 @@ print(api_key)
 """
 TO-DO
 
-1. voronoi created, next is to to delauny triangulation for area
-2. add comments for all functions, coordinate sequence should be x,y not y,x
+1. Write demo code
+2. Write README.MD
+3. Distrubtion on PyPi
+3. Add comments for all functions, coordinate sequence should be x,y not y,x
+
 """
 
 # check if places API function is working or not
