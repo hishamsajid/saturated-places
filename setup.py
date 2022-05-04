@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='saturated-places',                           # should match the package folder
-    packages=['saturated-palces'],                     # should match the package folder
+    packages=['saturated-places'],                     # should match the package folder
     version='0.0.1-beta',                                # important for updates
     license='MIT',                                  # should match your chosen license
     description='Effeciently download Google Places API POI data for area within Polygon',
