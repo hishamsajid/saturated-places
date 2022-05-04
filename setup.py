@@ -33,6 +33,6 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
     ],
     
-    download_url="https://github.com/mike-huls/toolbox_public/archive/refs/tags/0.0.3.tar.gz",
+    download_url="https://github.com/hishamsajid/saturated-places/archive/refs/tags/0.0.1.tar.gz",
 )
 
