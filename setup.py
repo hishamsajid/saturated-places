@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name='saturated-places',                           # should match the package folder
     packages=['saturated-palces'],                     # should match the package folder
-    version='0.0.1',                                # important for updates
+    version='0.0.1-beta',                                # important for updates
     license='MIT',                                  # should match your chosen license
     description='Effeciently download Google Places API POI data for area within Polygon',
     long_description=long_description,              # loads your README.md
@@ -18,7 +18,9 @@ setuptools.setup(
     project_urls = {                                # Optional
         "Bug Tracker": "https://github.com/hishamsajid/saturated-places/issues"
     },
-    install_requires=['requests'],                  # list all packages that your package uses
+    install_requires=['pandas','numpy','pyproj','requests',
+                        'geopandas','shapely',
+                        'scipy'],                  # list all packages that your package uses
     keywords=["pypi", "saturated-places", "gis",'places api','poi'], #descriptive meta-data
     classifiers=[                                   # https://pypi.org/classifiers
         'Development Status :: 3 - Alpha',
@@ -33,3 +35,4 @@ setuptools.setup(
     
     download_url="https://github.com/mike-huls/toolbox_public/archive/refs/tags/0.0.3.tar.gz",
 )
+

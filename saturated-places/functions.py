@@ -7,7 +7,6 @@ import json
 import warnings
 import requests
 import time
-import folium
 import sys
 
 
