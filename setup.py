@@ -5,21 +5,21 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='mikes_toolbox',                           # should match the package folder
-    packages=['mikes_toolbox'],                     # should match the package folder
-    version='0.0.3',                                # important for updates
+    name='saturated-places',                           # should match the package folder
+    packages=['saturated-palces'],                     # should match the package folder
+    version='0.0.1',                                # important for updates
     license='MIT',                                  # should match your chosen license
-    description='Testing installation of Package',
+    description='Effeciently download Google Places API POI data for area within Polygon',
     long_description=long_description,              # loads your README.md
     long_description_content_type="text/markdown",  # README.md is of type 'markdown'
-    author='Mike Huls',
-    author_email='mikehuls42@gmail.com',
-    url='https://github.com/mike-huls/toolbox_public', 
+    author='Hisham Sajid',
+    author_email='hishamsajid113@gmail.com',
+    url='https://github.com/hishamsajid/saturated-places', 
     project_urls = {                                # Optional
-        "Bug Tracker": "https://github.com/mike-huls/toolbox_public/issues"
+        "Bug Tracker": "https://github.com/hishamsajid/saturated-places/issues"
     },
     install_requires=['requests'],                  # list all packages that your package uses
-    keywords=["pypi", "mikes_toolbox", "tutorial"], #descriptive meta-data
+    keywords=["pypi", "saturated-places", "gis",'places api','poi'], #descriptive meta-data
     classifiers=[                                   # https://pypi.org/classifiers
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

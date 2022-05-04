@@ -32,7 +32,6 @@ print(api_key)
  
 # print(vor_gpd)
 # # mesh.to_csv('temp.csv')
-# # api_key = 'AIzaSyAprAtqptSsBMonIqvXaC_msTKCQifOFfE'
 
 # func_saturate(grid_df=vor_gpd,boundary_poly=poly,
 #                         fp_working_file='working.pkl',
