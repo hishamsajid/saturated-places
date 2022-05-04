@@ -5,8 +5,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='saturated-places',                           # should match the package folder
-    packages=['saturated-places'],                     # should match the package folder
+    name='saturatedplaces',                           # should match the package folder
+    packages=['saturatedplaces'],                     # should match the package folder
     version='0.0.1-beta',                                # important for updates
     license='MIT',                                  # should match your chosen license
     description='Effeciently download Google Places API POI data for area within Polygon',
@@ -33,6 +33,6 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
     ],
     
-    download_url="https://github.com/hishamsajid/saturated-places/archive/refs/tags/0.0.1.tar.gz",
+    download_url="https://github.com/hishamsajid/saturated-places/archive/refs/tags/0.0.2.tar.gz",
 )
 
