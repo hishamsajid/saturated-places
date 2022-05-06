@@ -77,5 +77,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 I will also be creating issues to chalk out what features, or improvements need to be worked on next. Feel free to pick
 up any one of these issues after aligning. 
 
-For any queries feel free to reach out to hishamsajid113@gmail.com
+For any queries feel free to reach out to hishamsajid113@gmail.com or drop a DM [@hishamsajid](https://twitter.com/hishamsajid)
 
