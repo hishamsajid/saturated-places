@@ -49,14 +49,14 @@ resolution = 500
 
 # Creates a mesh of equally spaced points within a polygon 'poly', resolution controls
 # distance between each point of the mesh.
-mesh = sp.func_get_grid_from_poly(poly=poly,resolution=resolution)
+mesh = sp.get_grid_from_poly(poly=poly,resolution=resolution)
 
 # Generates a fishnet grid using the mesh of point generated using mesh get_grid_from_poly function
-vor_gpd = sp.func_generate_fishnet(mesh,poly)
+vor_gpd = sp.generate_fishnet(mesh,poly)
 
 
 # Runs saturation algorithm to return a dataframe with places data for area within a polygon.
-places_df = sp.func_saturate(grid_df=vor_gpd,boundary_poly=poly,
+places_df = sp.saturate(grid_df=vor_gpd,boundary_poly=poly,
                         fp_working_file='working.shp',
                         fp_outpt='final.pkl',
                         api_request_limit=2000,
