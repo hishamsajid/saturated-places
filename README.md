@@ -1,6 +1,7 @@
 # saturated-places
 
 <!-- badges: start -->
+[![PyPI version](https://badge.fury.io/py/saturatedplaces.svg)](https://badge.fury.io/py/saturatedplaces)
 <!-- badges: end -->
 
 A python package for effeciently download Point of Interest (POI) data from Google Places API for large geographies. Currently, this is done by creating a fishnet grid within a custom polygon and
@@ -14,7 +15,7 @@ You can either go the latest release, download the tarball to your local directo
 
 `pip install saturated-places-X.Y.Z.tar.gz`
 
-Or you can go simply download it from PyPi by running: <br/>
+Or you can go simply download it from [PyPi](https://pypi.org/project/saturatedplaces/) by running: <br/>
 
 `pip install saturatedplaces`
 
