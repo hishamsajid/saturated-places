@@ -3,7 +3,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-A python package for effeciently download Point of Interest (POI) data from Google Places API for large geographies. Currently, this is done by creating a fishnet grid over a custom polygon and
+A python package for effeciently download Point of Interest (POI) data from Google Places API for large geographies. Currently, this is done by creating a fishnet grid within a custom polygon and
 running Delauny Triangulation for each grid cell till the API result is saturated i.e the API returns < 60 results. 
 
 We are open to contributors who wish to further optimize this logic. 

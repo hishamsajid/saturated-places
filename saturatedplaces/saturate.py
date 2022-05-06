@@ -254,6 +254,7 @@ def generate_fishnet(mesh,bbox):
     return vor_gpd
 
 
+# Function needs to be reworked to be made more dynamic instead of having 4 fixed levels (times triangulation is done)
 def func_saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
     """
     Takes a fishnet grid created using function generate_fishet and run Delauny Triangulation on each
@@ -405,19 +406,15 @@ def func_saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_lim
                                             else:
                                                 pass
             temp_dfs = pd.concat(rdf_list)
-            #fname = '../data/dev/vor_latest2.pkl'
             fname = fp_outpt
-            # fp_working_file
             temp_dfs.to_pickle(fname)
             
             grid_df.loc[ind,'fetched']=1
             temp = grid_df
             temp = temp.drop(columns=['centroid'])
             temp.to_file(fp_working_file)
-            #temp.to_file('../data/vector/dev/LAHORE/gmaps_places/grid_dfonoi_fishnet_1000m_updated_fix2.shp')
             
         elif(row.fetched==1):
             pass
-            #print('fetched')
 
     return temp_dfs

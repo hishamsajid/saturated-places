@@ -7,9 +7,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name='saturatedplaces',                           # should match the package folder
     packages=['saturatedplaces'],                     # should match the package folder
-    version='0.0.1',                                # important for updates
+    version='0.1.0',                                # important for updates
     license='MIT',                                  # should match your chosen license
-    description='Effeciently download Google Places API POI data for area within Polygon',
+    description='Faster, cheaper way of pulling Places API data for large geographies ',
     long_description=long_description,              # loads your README.md
     long_description_content_type="text/markdown",  # README.md is of type 'markdown'
     author='Hisham Sajid',
@@ -23,7 +23,7 @@ setuptools.setup(
                         'scipy'],                  # list all packages that your package uses
     keywords=["pypi", "saturated-places", "gis",'places api','poi'], #descriptive meta-data
     classifiers=[                                   # https://pypi.org/classifiers
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Documentation',
         'License :: OSI Approved :: MIT License',
@@ -33,6 +33,6 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
     ],
     
-    download_url="https://github.com/hishamsajid/saturated-places/archive/refs/tags/0.0.1.tar.gz",
+    download_url="https://github.com/hishamsajid/saturated-places/archive/refs/tags/0.1.0.tar.gz",
 )
 
