@@ -1,3 +1,3 @@
-from saturatedplaces.saturate import func_get_grid_from_poly
-from saturatedplaces.saturate import func_generate_fishnet
-from saturatedplaces.saturate import func_saturate
+from saturatedplaces.saturate import get_grid_from_poly
+from saturatedplaces.saturate import generate_fishnet
+from saturatedplaces.saturate import saturate

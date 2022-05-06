@@ -157,7 +157,7 @@ def func_lonlat_from_lat_lon(row):
 
 
 
-def func_get_grid_from_poly(poly,resolution,base_proj='epsg:4326'):
+def get_grid_from_poly(poly,resolution,base_proj='epsg:4326'):
     """
     Takes a polygon and creates a mesh of equally spaced points within it.
 
@@ -165,7 +165,7 @@ def func_get_grid_from_poly(poly,resolution,base_proj='epsg:4326'):
     poly: bounding box polygon within which we want to create mesh of Points
     
     resolution: Distance in meters between each point of the equally spaced mesh of Points.
-    This determines the size of each grid cell in the fishnet grid. func_generate_fishnet
+    This determines the size of each grid cell in the fishnet grid. generate_fishnet function
     esentially creates voronoi tesselations with each point of the mesh treated as a centroid.
 
     base_proj: Base Projection from which coordinates are projected to Web Mercator, EPSG: 3857
@@ -226,7 +226,7 @@ def func_get_grid_from_poly(poly,resolution,base_proj='epsg:4326'):
     
     return mesh
 
-def func_generate_fishnet(mesh,bbox):
+def generate_fishnet(mesh,bbox):
     # mesh['lat_lon'] =  mesh.apply(func_latlon_from_lat_lon,1)
     vor = Voronoi(list(mesh['lon_lat'].values))
     regions,vertices=func_voronoi_finite_polygons_2d(vor,radius=0.07)
@@ -254,9 +254,9 @@ def func_generate_fishnet(mesh,bbox):
     return vor_gpd
 
 
-def func_saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
+def saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
     """
-    Takes a fishnet grid created using func_generate_fishet and run Delauny Triangulation on each
+    Takes a fishnet grid created using generate_fishet function and run Delauny Triangulation on each
     grid cell until the Places API result is saturated.
 
     ---
