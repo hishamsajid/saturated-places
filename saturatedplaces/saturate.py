@@ -254,9 +254,9 @@ def generate_fishnet(mesh,bbox):
     return vor_gpd
 
 
-def saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
+def func_saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
     """
-    Takes a fishnet grid created using generate_fishet function and run Delauny Triangulation on each
+    Takes a fishnet grid created using function generate_fishet and run Delauny Triangulation on each
     grid cell until the Places API result is saturated.
 
     ---
@@ -264,9 +264,12 @@ def saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,ap
 
     boundary_poly: Polygon which acts as the boundary for data pulled via the Places API
 
-    fp_working_file: File path for working file, must be in .pkl format
+    fp_working_file: File path for working file, must be in .shp format, contains fishnet grid with 'fetched'
+    attribute where fetched=1 means the data for fetched grid cell has already been fetched. If function is 
+    interrupted during execution you may use this working file as grid_df input to ensure requests are not
+    duplicated.
 
-    fp_output: File path for final output file, must be in .shp format
+    fp_output: File path for final output file, must be in .pkl format
 
     api_request_limit: Maximum number of Places API requests that can be sent, use to control costs.
 
@@ -403,14 +406,14 @@ def saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,ap
                                                 pass
             temp_dfs = pd.concat(rdf_list)
             #fname = '../data/dev/vor_latest2.pkl'
-            fname = fp_working_file
-            fp_working_file
+            fname = fp_outpt
+            # fp_working_file
             temp_dfs.to_pickle(fname)
             
             grid_df.loc[ind,'fetched']=1
             temp = grid_df
             temp = temp.drop(columns=['centroid'])
-            temp.to_file(fp_outpt)
+            temp.to_file(fp_working_file)
             #temp.to_file('../data/vector/dev/LAHORE/gmaps_places/grid_dfonoi_fishnet_1000m_updated_fix2.shp')
             
         elif(row.fetched==1):
