@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: saturatedplaces
-Version: 0.1.0
+Version: 0.1.1
 Summary: Faster, cheaper way of pulling Places API data for large geographies 
 Home-page: https://github.com/hishamsajid/saturated-places
 Author: Hisham Sajid
 Author-email: hishamsajid113@gmail.com
 License: MIT
-Download-URL: https://github.com/hishamsajid/saturated-places/archive/refs/tags/0.1.0.tar.gz
+Download-URL: https://github.com/hishamsajid/saturated-places/archive/refs/tags/0.1.1.tar.gz
 Project-URL: Bug Tracker, https://github.com/hishamsajid/saturated-places/issues
 Keywords: pypi,saturated-places,gis,places api,poi
 Platform: UNKNOWN
@@ -24,9 +24,10 @@ License-File: LICENSE
 # saturated-places
 
 <!-- badges: start -->
+[![PyPI version](https://badge.fury.io/py/saturatedplaces.svg)](https://badge.fury.io/py/saturatedplaces)
 <!-- badges: end -->
 
-A python package for effeciently download Point of Interest (POI) data from Google Places API for large geographies. Currently, this is done by creating a fishnet grid within a custom polygon and
+A python package for effeciently downloading Point of Interest (POI) data from Google Places API for large geographies. Currently, this is done by creating a fishnet grid within a custom polygon and
 running Delauny Triangulation for each grid cell till the API result is saturated i.e the API returns < 60 results. 
 
 We are open to contributors who wish to further optimize this logic. 
@@ -37,7 +38,7 @@ You can either go the latest release, download the tarball to your local directo
 
 `pip install saturated-places-X.Y.Z.tar.gz`
 
-Or you can go simply download it from PyPi by running: <br/>
+Or you can go simply download it from [PyPi](https://pypi.org/project/saturatedplaces/) by running: <br/>
 
 `pip install saturatedplaces`
 
