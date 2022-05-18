@@ -255,7 +255,7 @@ def generate_fishnet(mesh,bbox):
 
 
 # Function needs to be reworked to be made more dynamic instead of having 4 fixed levels (times triangulation is done)
-def func_saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
+def saturate(grid_df,boundary_poly,fp_working_file,fp_outpt,api_request_limit,api_key,resolution):
     """
     Takes a fishnet grid created using function generate_fishet and run Delauny Triangulation on each
     grid cell until the Places API result is saturated.
